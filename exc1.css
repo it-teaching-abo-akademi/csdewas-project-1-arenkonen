@@ -51,8 +51,6 @@
     .col-12 {width: 100%;}
 }
 
-
-
 html {
     font-family: 'Lucida Sans', sans-serif;
 }
@@ -67,7 +65,7 @@ The border is only there when the site is in desktop sizes*/
 @media only screen and (min-width: 992px){
     .menu {
         border:1px solid yellowgreen;
-        height: 1000px;
+        height: 900px;
         padding: 15px;
     }
 }
@@ -119,4 +117,21 @@ img {
 
 .centeraligned {
     text-align: center;
+}
+
+#dragdrop {
+    width: 250px;
+    height: 230px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+}
+#dragdrop2 {
+    width: 250px;
+    height: 230px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+    float: right;
+}
+#drag {
+    align-content: center;
 }

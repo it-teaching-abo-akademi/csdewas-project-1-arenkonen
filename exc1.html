@@ -9,7 +9,7 @@
 <body>
     <div class="row">
         <div class="col-2 col-s-2 menu" >
-        <ul></ul>
+        <ul>
             <li>Item 1</li>
             <li>Item 2</li>
             <li>Item 3</li>
@@ -52,6 +52,32 @@
                 purus ut faucibus pulvinar.
             </p>
         </div>
+        
+        <div class="col-4 col-s-4" id="dragdrop" ondrop="drop(event)" ondragover="allowDrop(event)">
+        </div> 
+
+        <div class="col-4 col-s-4" >
+            <img id="drag" src="sonic.jpg" width="244" height="221" draggable="true" ondragstart="drag(event)" > 
+        </div>
+
+        <div class="col-4 col-s-4" id="dragdrop2" ondrop="drop(event)" ondragover="allowDrop(event)">
+        </div> 
+
+        
     </div>
+
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id)
+        }
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            ev.target.appendChild(document.getElementById(data))
+        }
+        </script>
 </body>
 </html>
