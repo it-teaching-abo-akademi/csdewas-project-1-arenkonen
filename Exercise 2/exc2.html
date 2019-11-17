@@ -6,20 +6,45 @@
     <title>Exercise 2</title>
     <link rel="stylesheet" type="text/css" href="exc2.css">
     <script src="JsBarcode.code128.min.js"></script>
+    <script src="exc2.js"></script>
 </head>
 <body>
     <div class="row">
-        <div class="col-4">
-            <form>
-                Virtual bar code: 
-                <input type="text" name="virtualbarcode">
-            </form>
-        </div>
+
         <div class="col-12">
-            <svg id="barcode"></svg>
-            
+            Virtual bar code: 
+            <input id="virtualbarcode">
+            <button type="button" onclick="decoder()">Decode</button>
         </div>
 
+        <div class="col-6">
+            <p>
+                Payee's IBAN:       
+            </p>
+            <p id="iban"></p>
+        </div>
+        <div class="col-6">
+                <p>
+                    Amount to be paid:       
+                </p>
+                <p id="amount"></p>
+        </div>
+        <div class="col-6">
+                <p>
+                    Payment reference:       
+                </p>
+                <p id="reference"></p>
+        </div>
+        <div class="col-6">
+                <p>
+                    Duedate:    
+                </p>
+                <p id="duedate"></p>
+        </div>
+        
+        <div class="col-12">
+                <svg id="barcode"></svg>
+            </div>
     </div>
 </body>
 </html>
