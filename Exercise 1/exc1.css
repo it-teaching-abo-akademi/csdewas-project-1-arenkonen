@@ -55,11 +55,6 @@ html {
     font-family: 'Lucida Sans', sans-serif;
 }
 
-/* .header {
-    background-color: darkmagenta;
-    color: aliceblue;
-    padding: 15px;
-} */
 /* The menu makes a border around the div menu. 
 The border is only there when the site is in desktop sizes*/
 @media only screen and (min-width: 992px){

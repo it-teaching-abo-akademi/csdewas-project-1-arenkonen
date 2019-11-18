@@ -1,11 +1,13 @@
 function decoder(){
     x = document.getElementById("virtualbarcode").value;
-    JsBarcode("#barcode", x);
 
     var version = x[0];
     var IBAN = x.substr(1,16);
-    var amount = x.substr(17,8);
-    var duedate = x.substr(48,6);
+    var IBANformated = formatNumbersIBAN(IBAN);
+
+    var amount = formatNumbersAmount(x);
+
+    var duedate = formatNumbersDate(x);
 
     console.log(IBAN);
     console.log(amount);
@@ -14,21 +16,79 @@ function decoder(){
     
    if(version==4){
        console.log("4");
+       //The reference in version 4 is 20 characters long and starts at 28
        var reference = x.substr(28,20);
-       document.getElementById("iban").innerHTML = IBAN;
-       document.getElementById("amount").innerHTML = amount;
-       document.getElementById("reference").innerHTML = reference;
+       var parsedref = parseInt(reference,10);
+       var formatedref = formatNumbersReference(parsedref);
+
+       document.getElementById("iban").innerHTML = IBANformated;
+       document.getElementById("amount").innerHTML = amount +" euro";
+       document.getElementById("reference").innerHTML = formatedref;
        document.getElementById("duedate").innerHTML = duedate;
+       JsBarcode("#barcode", x);
     }
    else if(version==5){
        console.log("5");
+       //The reference in version 5 is 23 characters long and starts at 25
        var reference = x.substr(25,23);
-       document.getElementById("iban").innerHTML = IBAN;
+       var parsedref = parseInt(reference,10);
+       var formatedref = formatNumbersReference(parsedref);
+
+       document.getElementById("iban").innerHTML = IBANformated;
        document.getElementById("amount").innerHTML = amount;
-       document.getElementById("reference").innerHTML = reference;
+       document.getElementById("reference").innerHTML = "RF" + formatedref;
        document.getElementById("duedate").innerHTML = duedate;
+       JsBarcode("#barcode", x);
    }
    else{
        console.log("error");
+       document.getElementById("iban").innerHTML = "";
+       document.getElementById("amount").innerHTML = "";
+       document.getElementById("reference").innerHTML = "";
+       document.getElementById("duedate").innerHTML = "";
    }
+}
+
+// Hides the information in the element with ID hide when it is visible and shows when hidden, also changes the text on the button
+function hideInfo(){
+    var x = document.getElementById("hide");
+    var y = document.getElementById("hidebutt")
+    if (x.style.display === "none"){
+        x.style.display = "block";
+        y.innerHTML = "Hide";
+    }
+    else {
+        x.style.display = "none";
+        y.innerHTML = "Show";
+    }
+}
+
+// formats the IBAN to have a space between the first 2 and last 2 number and a space between each 4th
+function formatNumbersIBAN(x) {
+    var first2 = x.substr(0,2);
+    var last2 = x.substr(14,2);
+    var rest = x.substr(2,12);
+    var b = rest.toString().replace(/\B(?=(\d{4})+(?!\d))/g, " ");
+    return first2 + " " + b + " " + last2;
+}
+
+// formats the reference to have spaces between each 5th number
+function formatNumbersReference(x) {
+    return x.toString().replace(/\B(?=(\d{5})+(?!\d))/g, " ");
+}
+
+// formats the amount to be paid to remove the zeroes at the beginning and adds a . between euros and cents
+function formatNumbersAmount(x) {
+    var amounteuro = x.substr(17,6);
+    var parsedeur = parseInt(amounteuro,10);
+    var amountcent = x.substr(23,2);
+    return parsedeur + "." + amountcent;
+}
+
+// formats the date to be in the correct order and adds a 20 to the beginning of the year
+function formatNumbersDate(x){
+    var dueyear = x.substr(48,2);
+    var duemonth = x.substr(50,2);
+    var dueday = x.substr(52,2);
+    return dueday + "." + duemonth + ".20" + dueyear;
 }

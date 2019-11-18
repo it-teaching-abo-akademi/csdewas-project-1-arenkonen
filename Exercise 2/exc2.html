@@ -17,34 +17,38 @@
             <button type="button" onclick="decoder()">Decode</button>
         </div>
 
-        <div class="col-6">
-            <p>
-                Payee's IBAN:       
-            </p>
-            <p id="iban"></p>
-        </div>
-        <div class="col-6">
+        <button onclick="hideInfo()" id="hidebutt">Hide</button>
+        <div id="hide">
+            <div class="col-6">
                 <p>
-                    Amount to be paid:       
+                    Payee's IBAN:       
                 </p>
-                <p id="amount"></p>
-        </div>
-        <div class="col-6">
-                <p>
-                    Payment reference:       
-                </p>
-                <p id="reference"></p>
-        </div>
-        <div class="col-6">
-                <p>
-                    Duedate:    
-                </p>
-                <p id="duedate"></p>
-        </div>
-        
-        <div class="col-12">
-                <svg id="barcode"></svg>
+                <p id="iban"></p>
             </div>
+            <div class="col-6">
+                    <p>
+                        Amount to be paid:       
+                    </p>
+                    <p id="amount"></p>
+            </div>
+            <div class="col-6">
+                    <p>
+                        Payment reference:       
+                    </p>
+                    <p id="reference"></p>
+            </div>
+            <div class="col-6">
+                    <p>
+                        Duedate:    
+                    </p>
+                    <p id="duedate"></p>
+            </div>
+            
+            <div class="col-12">
+                    <svg id="barcode"></svg>
+            </div>
+        </div>
+       
     </div>
 </body>
 </html>
