@@ -104,8 +104,12 @@ html {
     font-family: "Lucida Sans", sans-serif;
 }
 
-#hide {
-    border: 1px solid gray;
-    height: 500px;
+.map {
     padding: 15px;
 }
+
+
+/* 
+.routelist {
+    padding: 15px;
+} */

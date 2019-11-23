@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="exc3.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/css/ol.css" type="text/css" />
+    <style>
+        .map {
+            height: 600px;
+            width: 100%;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/build/ol.js"></script>
+    <script src="exc3.js"></script>
+    <title>Exercise 3</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-12">
+            Select the bus line:
+            <select id="routelist"> </select>
+        </div>
+        <div class="col-4 col-s-4">
+            <button type="button" onclick="decoder()">Show buses</button>
+        </div>
+
+        <div class="col-4 col-s-4">
+            <button type="button" onclick="decoder()">Refresh</button>
+        </div>
+
+        <div class="col-4 col-s-4">
+            <button type="button" onclick="decoder()">Show route</button>
+        </div>
+
+        <div id="map" class="map col-12 col-s-12"></div>
+        <script type="text/javascript">
+            var map = new ol.Map({
+                target: "map",
+                layers: [
+                    new ol.layer.Tile({
+                        source: new ol.source.OSM()
+                    })
+                ],
+                view: new ol.View({
+                    center: ol.proj.fromLonLat([22.282578, 60.457086]),
+                    zoom: 12
+                })
+            });
+        </script>
+    </div>
+</body>
+
+</html>
