@@ -17,7 +17,14 @@
             <button type="button" onclick="decoder()">Decode</button>
         </div>
 
+        <script>
+            var x = document.getElementById("virtualbarcode");
+            x.addEventListener("focus", handler);
+            x.addEventListener("blur", handler);
+        </script>
+        
         <button onclick="hideInfo()" id="hidebutt">Hide</button>
+        <p id="error"></p>
         <div id="hide">
             <div class="col-6">
                 <p>

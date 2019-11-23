@@ -8,7 +8,7 @@ function decoder(){
     var amount = formatNumbersAmount(x);
 
     var duedate = formatNumbersDate(x);
-
+    document.getElementById("error").innerHTML = "";
     console.log(IBAN);
     console.log(amount);
     //console.log(reference);
@@ -25,27 +25,30 @@ function decoder(){
        document.getElementById("amount").innerHTML = amount +" euro";
        document.getElementById("reference").innerHTML = formatedref;
        document.getElementById("duedate").innerHTML = duedate;
+       document.getElementById("barcode").style.display = "block";
        JsBarcode("#barcode", x);
     }
    else if(version==5){
        console.log("5");
        //The reference in version 5 is 23 characters long and starts at 25
        var reference = x.substr(25,23);
-       var parsedref = parseInt(reference,10);
-       var formatedref = formatNumbersReference(parsedref);
+       var formatedref = formatNumbersReference5(reference);
 
        document.getElementById("iban").innerHTML = IBANformated;
        document.getElementById("amount").innerHTML = amount;
-       document.getElementById("reference").innerHTML = "RF" + formatedref;
+       document.getElementById("reference").innerHTML =formatedref;
        document.getElementById("duedate").innerHTML = duedate;
+       document.getElementById("barcode").style.display = "block";
        JsBarcode("#barcode", x);
    }
    else{
        console.log("error");
+       document.getElementById("error").innerHTML = "The inserted code is invalid";
        document.getElementById("iban").innerHTML = "";
        document.getElementById("amount").innerHTML = "";
        document.getElementById("reference").innerHTML = "";
        document.getElementById("duedate").innerHTML = "";
+       document.getElementById("barcode").style.display = "none";
    }
 }
 
@@ -77,10 +80,18 @@ function formatNumbersReference(x) {
     return x.toString().replace(/\B(?=(\d{5})+(?!\d))/g, " ");
 }
 
+// 
+function formatNumbersReference5(x) {
+    x = "RF" + x.replace(/[^\d]|(.)\1/g, "");
+    return x.toString().replace(/\B(?=(\d{4})+(?!\d))/g, " ");
+}
+
 // formats the amount to be paid to remove the zeroes at the beginning and adds a . between euros and cents
 function formatNumbersAmount(x) {
     var amounteuro = x.substr(17,6);
-    var parsedeur = parseInt(amounteuro,10);
+
+    //The regex expression adds a "," between every third letter in the euro amount
+    var parsedeur = parseInt(amounteuro,10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     var amountcent = x.substr(23,2);
     return parsedeur + "." + amountcent;
 }
@@ -90,5 +101,20 @@ function formatNumbersDate(x){
     var dueyear = x.substr(48,2);
     var duemonth = x.substr(50,2);
     var dueday = x.substr(52,2);
-    return dueday + "." + duemonth + ".20" + dueyear;
+    var finaldate = dueday + "." + duemonth + ".20" + dueyear;
+    //If a duedate is not given it will return None instead of 00.00.2000
+    if(finaldate == "00.00.2000"){
+        return "None";
+    }
+    else return finaldate;
+}
+
+//Event handler changes the background colour of the input field when in focus
+function handler(evt){
+    if (evt.type == "focus"){
+        evt.target.style.backgroundColor = "lightgray";
+    }
+    else if (evt.style == "blur"){
+        evt.target.style.backgroundColor = "white";
+    }
 }
