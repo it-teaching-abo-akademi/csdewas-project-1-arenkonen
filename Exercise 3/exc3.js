@@ -1,4 +1,4 @@
-var oReq = new XMLHttpsRequest();
+var oReq = new XMLHttpRequest();
 oReq.onload = reqListener;
 oReq.onerror = reqError;
 oReq.open("get", "https://data.foli.fi/gtfs/routes");
@@ -32,7 +32,7 @@ function getBusRoute(){
     var x = document.getElementById("routelist");
     var selRoute = x.options[x.selectedIndex].value;
     console.log(selRoute);
-    var xhr = new XMLHttpsRequest();
+    var xhr = new XMLHttpRequest();
     xhr.open("get", "https://data.foli.fi/gtfs/trips/route/" + selRoute, true);
     xhr.onload = getShape;
     xhr.send();   
@@ -42,7 +42,7 @@ function getShape(){
     var data = JSON.parse(this.response);
     var shapeid = data[0].shape_id;
 
-    var xhr = new XMLHttpsRequest();
+    var xhr = new XMLHttpRequest();
     xhr.open("get", "https://data.foli.fi/gtfs/shapes/" + shapeid, true);
     xhr.onload = drawRoute;
     xhr.send();   
