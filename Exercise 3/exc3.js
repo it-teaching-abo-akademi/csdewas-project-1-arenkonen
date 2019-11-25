@@ -1,7 +1,7 @@
 var oReq = new XMLHttpRequest();
 oReq.onload = reqListener;
 oReq.onerror = reqError;
-oReq.open("get", "http://data.foli.fi/gtfs/routes", true);
+oReq.open("get", "https://data.foli.fi/gtfs/routes");
 oReq.send();
 
 function reqListener() {
