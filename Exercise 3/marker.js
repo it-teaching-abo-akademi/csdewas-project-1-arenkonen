@@ -8,7 +8,7 @@ function drawMarker(lon, lat) {
 }
 
 function getVehicles() {
-    var xhr = new XMLHttpRequest();
+    var xhr = new XMLHttpsRequest();
     xhr.onload = findBuses;
     xhr.open("get", "https://data.foli.fi/siri/vm", true);
     xhr.send();
