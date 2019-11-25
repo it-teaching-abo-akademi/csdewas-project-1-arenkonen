@@ -31,7 +31,6 @@ From SHAPES get shape coords
 function getBusRoute(){
     var x = document.getElementById("routelist");
     var selRoute = x.options[x.selectedIndex].value;
-    console.log(selRoute);
     var xhr = new XMLHttpRequest();
     xhr.open("get", "https://data.foli.fi/gtfs/trips/route/" + selRoute, true);
     xhr.onload = getShape;

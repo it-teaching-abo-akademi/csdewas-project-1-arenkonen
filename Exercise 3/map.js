@@ -8,12 +8,12 @@ const map = new ol.Map({
             source: new ol.source.Vector(),
             style: new ol.style.Style({
                 image: new ol.style.Icon({
-                    src: "https://maps.google.com/mapfiles/ms/micons/blue.png",
-                    anchor: [0.5, 32],
+                    src: "busicon.png",
+                    anchor: [0.5, 1],
                     anchorXUnits: "fraction",
-                    anchorYUnits: "pixels",
+                    anchorYUnits: "fraction",
                     opacity: 1,
-                    scale: 1
+                    scale: 0.4
                 })
             })
         }),

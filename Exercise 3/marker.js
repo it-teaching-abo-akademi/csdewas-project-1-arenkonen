@@ -20,7 +20,7 @@ function findBuses() {
 
     var x = document.getElementById("routelist");
     let selRoute = x.options[x.selectedIndex].value;
-    console.log(selRoute);
+    
     clearMarkers();
     for (let i = 0; i < vehicleList.length; i++) {
         if (vehicleList[i].publishedlinename === selRoute) {
