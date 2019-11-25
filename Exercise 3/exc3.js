@@ -33,7 +33,7 @@ function getBusRoute(){
     var selRoute = x.options[x.selectedIndex].value;
     console.log(selRoute);
     var xhr = new XMLHttpRequest();
-    xhr.open("get", "http://data.foli.fi/gtfs/trips/route/" + selRoute, true);
+    xhr.open("get", "https://data.foli.fi/gtfs/trips/route/" + selRoute, true);
     xhr.onload = getShape;
     xhr.send();   
 }
@@ -43,7 +43,7 @@ function getShape(){
     var shapeid = data[0].shape_id;
 
     var xhr = new XMLHttpRequest();
-    xhr.open("get", "http://data.foli.fi/gtfs/shapes/" + shapeid, true);
+    xhr.open("get", "https://data.foli.fi/gtfs/shapes/" + shapeid, true);
     xhr.onload = drawRoute;
     xhr.send();   
 }
