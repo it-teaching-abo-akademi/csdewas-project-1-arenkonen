@@ -106,10 +106,6 @@ html {
 
 .map {
     padding: 15px;
+    height: 600px;
+    width: 100%;
 }
-
-
-/* 
-.routelist {
-    padding: 15px;
-} */
