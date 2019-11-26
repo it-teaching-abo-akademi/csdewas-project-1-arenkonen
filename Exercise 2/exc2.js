@@ -40,8 +40,10 @@ function decoder() {
         document.getElementById("barcode").style.display = "block";
         JsBarcode("#barcode", x);
     } else {
+        //If the version is neither 4 nor 5 it warns the user
         console.log("error");
-        document.getElementById("error").innerHTML = "The inserted code is invalid";
+        document.getElementById("error").innerHTML =
+            "The inserted code is invalid";
         document.getElementById("iban").innerHTML = "";
         document.getElementById("amount").innerHTML = "";
         document.getElementById("reference").innerHTML = "";
@@ -77,7 +79,7 @@ function formatNumbersReference(x) {
     return x.toString().replace(/\B(?=(\d{5})+(?!\d))/g, " ");
 }
 
-//
+// formats the reference number for version 5 to have a space between each 4th number and an RF at the beginning
 function formatNumbersReference5(x) {
     x = "RF" + x.replace(/[^\d]|(.)\1/g, "");
     return x.toString().replace(/\B(?=(\d{4})+(?!\d))/g, " ");

@@ -1,9 +1,11 @@
+//Initializes the site by getting each bus line from the Föli API
 var oReq = new XMLHttpRequest();
 oReq.onload = reqListener;
 oReq.onerror = reqError;
 oReq.open("get", "https://data.foli.fi/gtfs/routes");
 oReq.send();
 
+//Prases the JSON and adds each bus line found to the drop down menu in the HTML
 function reqListener() {
     var data = JSON.parse(this.responseText);
     console.log(data);
@@ -22,21 +24,18 @@ function reqError(err) {
     console.log("Fetch Error :-S", err);
 }
 
-/*
-From ROUTES get route_id ^
-From TRIPS get trip with route_id 
-From trip get shape_id
-From SHAPES get shape coords
-*/
+//Retrieves information about the route selected from the Föli API
 function getBusRoute(){
     var x = document.getElementById("routelist");
     var selRoute = x.options[x.selectedIndex].value;
     var xhr = new XMLHttpRequest();
     xhr.open("get", "https://data.foli.fi/gtfs/trips/route/" + selRoute, true);
     xhr.onload = getShape;
+    xhr.onerror = reqError;
     xhr.send();   
 }
 
+//Retrieves the shape of the selected route from the Föli API
 function getShape(){
     var data = JSON.parse(this.response);
     var shapeid = data[0].shape_id;
@@ -44,9 +43,11 @@ function getShape(){
     var xhr = new XMLHttpRequest();
     xhr.open("get", "https://data.foli.fi/gtfs/shapes/" + shapeid, true);
     xhr.onload = drawRoute;
+    xhr.onerror = reqError;
     xhr.send();   
 }
 
+//Draws the shape of the route from the Föli API by drawing lines between each coordinate in the shape JSON
 function drawRoute(){
     if(this.status === 200) {
         let data = JSON.parse(this.response);
@@ -60,7 +61,7 @@ function drawRoute(){
                 ])
             )
         }
-
+        //Before drawing the new route every drawn layer is removed from the map
         let source = map.getLayers()["array_"][2].getSource();
         let source2 = map.getLayers()["array_"][1].getSource();
         source2.clear();

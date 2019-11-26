@@ -107,5 +107,13 @@ html {
 #hide {
     border: 1px solid gray;
     height: 500px;
+    width: 100%;
     padding: 15px;
+}
+
+/* The box goes far enough down when in tablet or phone mode */
+@media only screen and (max-width: 992px) {
+ #hide {
+     height: 700px;
+ }
 }
