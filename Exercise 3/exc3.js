@@ -63,8 +63,6 @@ function drawRoute(){
         }
         //Before drawing the new route every drawn layer is removed from the map
         let source = map.getLayers()["array_"][2].getSource();
-        let source2 = map.getLayers()["array_"][1].getSource();
-        source2.clear();
         source.clear();
         source.addFeature(
             new ol.Feature(
