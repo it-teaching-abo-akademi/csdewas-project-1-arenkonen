@@ -103,6 +103,9 @@ The border is only there when the site is in desktop sizes*/
     .banner{
         width: 83.33%
     }
+    #dragdrop2 {
+        float: right;
+    }
 }
 
 img {
@@ -125,8 +128,28 @@ img {
     height: 230px;
     padding: 10px;
     border: 1px solid #aaaaaa;
-    float: right;
 }
+/* Should center the picture but doesn't for some reason... */
 #drag {
-    align-content: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: yellowgreen;
+}
+.navbar li{
+    display: block;
+    float: left;
+    padding: 8px 16px;
+    color: aliceblue;
+}
+
+.navbar li:hover{
+    background-color: chartreuse;
 }
